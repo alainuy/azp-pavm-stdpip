@@ -45,9 +45,9 @@ resource "azurerm_network_interface" "mgmt_nic" {
 
 # Network Interface for untrust (public)
 resource "azurerm_network_interface" "untrust_nic" {
-  name                = "untrust_nic"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                  = "untrust_nic"
+  location              = azurerm_resource_group.rg.location
+  resource_group_name   = azurerm_resource_group.rg.name
   ip_forwarding_enabled = true
 
 
@@ -69,9 +69,9 @@ resource "azurerm_network_interface" "untrust_nic" {
 
 # Network Interface for trust (internal)
 resource "azurerm_network_interface" "trust_nic" {
-  name                = "trust_nic"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                  = "trust_nic"
+  location              = azurerm_resource_group.rg.location
+  resource_group_name   = azurerm_resource_group.rg.name
   ip_forwarding_enabled = true
 
   ip_configuration {
