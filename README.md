@@ -1,4 +1,4 @@
-# Azure Palo Alto VM-series Firewall with Standard Public IPs
+# Azure Palo Alto VM-series FW with Standard Public IPs
 
 ## Overview
 This Terraform project deploys a Palo Alto VM-series firewall in Azure with Standard SKU Public IP addresses. The configuration sets up a complete network security solution with management, untrust (external), and trust (internal) interfaces.
