@@ -56,10 +56,13 @@ This Terraform project deploys a Palo Alto VM-series firewall in Azure with Stan
 - `subs_id`: Azure subscription ID
 
 ## Recommendations
-1. **Security**:
-   - Implement Network Security Groups (NSGs) for each subnet
-   - Restrict management access to specific IP ranges
-   - Enable Azure Monitor and logging
+1. **Execute the following command to accept the terms for the Palo Alto VM-series Flex image**:
+
+az vm image terms accept \
+  --urn paloaltonetworks:vmseries-flex:byol:11.2.5
+
+** before executing plan and apply
+
 2. **High Availability**: Consider adding a second VM in a different Availability Zone
 3. **Backup**: Implement backup for the firewall configuration
 4. **Tags**: Add tags to resources for better organization and cost tracking
