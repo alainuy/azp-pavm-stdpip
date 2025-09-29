@@ -48,12 +48,15 @@ resource "azurerm_network_interface" "untrust_nic" {
   name                = "untrust_nic"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  ip_forwarding_enabled = true
+
 
   ip_configuration {
     name                          = "untrust-ip-config-1"
     subnet_id                     = azurerm_subnet.untrust_subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.untrust_pip_1.id
+    primary                       = true
   }
 
   ip_configuration {
@@ -69,10 +72,12 @@ resource "azurerm_network_interface" "trust_nic" {
   name                = "trust_nic"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  ip_forwarding_enabled = true
 
   ip_configuration {
     name                          = "trust-ip-config"
     subnet_id                     = azurerm_subnet.trust_subnet.id
     private_ip_address_allocation = "Dynamic"
+
   }
 }

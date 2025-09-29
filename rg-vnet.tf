@@ -37,3 +37,59 @@ resource "azurerm_subnet" "trust_subnet" {
   resource_group_name  = azurerm_resource_group.rg.name
   address_prefixes     = [var.trust_subnet_prefix]
 }
+
+# Network Security Group for Management Subnet
+resource "azurerm_network_security_group" "mgmt_nsg" {
+  name                = "mgmt-nsg"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "AllowHttpsInbound"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+# Associate NSG with Management Subnet
+resource "azurerm_subnet_network_security_group_association" "mgmt_nsg_association" {
+  subnet_id                 = azurerm_subnet.mgmt_subnet.id
+  network_security_group_id = azurerm_network_security_group.mgmt_nsg.id
+}
+
+# Network Security Group for Untrust and Trust Subnets
+resource "azurerm_network_security_group" "data_nsg" {
+  name                = "data-nsg"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "AllowAllTCPInbound"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+# Associate NSG with Untrust Subnet
+resource "azurerm_subnet_network_security_group_association" "untrust_nsg_association" {
+  subnet_id                 = azurerm_subnet.untrust_subnet.id
+  network_security_group_id = azurerm_network_security_group.data_nsg.id
+}
+
+# Associate NSG with Trust Subnet
+resource "azurerm_subnet_network_security_group_association" "trust_nsg_association" {
+  subnet_id                 = azurerm_subnet.trust_subnet.id
+  network_security_group_id = azurerm_network_security_group.data_nsg.id
+}

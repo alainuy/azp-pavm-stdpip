@@ -42,5 +42,5 @@ variable "admin_password" {
 
 variable "subs_id" {
   description = "subscription id"
-  type = string
+  type        = string
 }
