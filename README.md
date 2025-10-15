@@ -3,6 +3,12 @@
 ## Overview
 This Terraform project deploys a Palo Alto VM-series firewall in Azure with Standard SKU Public IP addresses. The configuration sets up a complete network security solution with management, untrust (external), and trust (internal) interfaces.
 
+## First thing first
+1. **Execute the following command to accept the terms and conditions for the Palo Alto VM-series Flex image**:
+
+az vm image terms accept \
+--urn paloaltonetworks:vmseries-flex:byol:11.2.5
+
 ## Key Components
 
 ### 1. Resource Group
@@ -55,14 +61,3 @@ This Terraform project deploys a Palo Alto VM-series firewall in Azure with Stan
 - `admin_password`: Password for the admin user
 - `subs_id`: Azure subscription ID
 
-## Recommendations
-1. **Execute the following command to accept the terms for the Palo Alto VM-series Flex image**:
-
-az vm image terms accept \
-  --urn paloaltonetworks:vmseries-flex:byol:11.2.5
-
-** before executing plan and apply
-
-2. **High Availability**: Consider adding a second VM in a different Availability Zone
-3. **Backup**: Implement backup for the firewall configuration
-4. **Tags**: Add tags to resources for better organization and cost tracking
