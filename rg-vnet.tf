@@ -88,8 +88,8 @@ resource "azurerm_subnet_network_security_group_association" "untrust_nsg_associ
   network_security_group_id = azurerm_network_security_group.data_nsg.id
 }
 
-# Associate NSG with Trust Subnet
-resource "azurerm_subnet_network_security_group_association" "trust_nsg_association" {
-  subnet_id                 = azurerm_subnet.trust_subnet.id
-  network_security_group_id = azurerm_network_security_group.data_nsg.id
-}
+# No NSG with Trust Subnet (by default)
+# resource "azurerm_subnet_network_security_group_association" "trust_nsg_association" {
+#   subnet_id                 = azurerm_subnet.trust_subnet.id
+#   network_security_group_id = azurerm_network_security_group.data_nsg.id
+# }
