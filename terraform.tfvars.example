@@ -1,0 +1,37 @@
+
+# ============================================
+# Terraform Variables Configuration Template
+# ============================================
+#
+# This file serves as a template for configuring the Azure Palo Alto VM-Series deployment.
+#
+# INSTRUCTIONS:
+# 1. Copy this file to 'terraform.tfvars'
+# 2. Update the values according to your environment
+# 3. For production environments, consider using environment variables or Azure Key Vault
+#    for sensitive values like passwords and secrets.
+#
+# NOTE: All IP addresses and subnets should be planned according to your network architecture
+# to avoid conflicts with existing resources.
+# ============================================
+
+# Azure Subscription ID (required)
+# Replace with your Azure Subscription ID
+
+subs_id = "00000000-0000-0000-0000-000000000000"
+
+# Resource Group Configuration
+resource_group_name = "HUB-VNET-RG"
+location           = "southeastasia"
+
+# Virtual Network Configuration
+vnet_name           = "fwVNET"
+vnet_address_space  = ["10.0.5.0/24"]
+
+# Subnet Configurations
+mgmt_subnet_prefix  = "10.0.5.0/27"
+untrust_subnet_prefix = "10.0.5.32/27"
+trust_subnet_prefix  = "10.0.5.64/27"
+
+# Administrator Credentials
+admin_password = "YourSecurePassword123!"  # Please change this to a strong password

@@ -51,6 +51,25 @@ az vm image terms accept \
 - **Management**: 1 Standard SKU Public IP
 - **Untrust**: 2 Standard SKU Public IPs (for HA or different services)
 
+## Configuration Template
+
+A template file `terraform.tfvars.example` is provided to help you configure the deployment. To use it:
+
+1. Copy the example file to create your configuration:
+   ```bash
+   cp terraform.tfvars.example terraform.tfvars
+   ```
+
+2. Edit `terraform.tfvars` with your specific values:
+   - `subs_id`: Your Azure Subscription ID
+   - `resource_group_name`: Name for your resource group
+   - `location`: Azure region for deployment (default: southeastasia)
+   - `vnet_name` and `vnet_address_space`: Network configuration
+   - Subnet prefixes for management, untrust, and trust interfaces
+   - `admin_password`: Secure password for the firewall admin user
+
+3. For production environments, consider using environment variables or Azure Key Vault for sensitive values.
+
 ## Configuration Notes
 1. **Security Consideration**: The admin password is marked as sensitive but is still passed directly. Consider using Azure Key Vault for better security.
 2. **VM Size**: The VM size is set to `Standard_D3_v2`, which is recommended for testing. Production environments might require larger instances.
